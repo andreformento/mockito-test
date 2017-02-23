@@ -1,5 +1,6 @@
-package com.formento.mockito.test;
+package com.formento.mycomplexapplication;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,10 +11,10 @@ public class PersonTest {
     @Test
     public void shouldConfigureAPersonName() {
         // given
-        String name = "André Formento";
+        final String name = "André Formento";
 
         // when
-        Person person = new Person(name);
+        final Person person = new Person(name);
 
         // then
         assertNotNull(person);
@@ -23,10 +24,10 @@ public class PersonTest {
     @Test
     public void shouldDoSomething() {
         // given
-        String name = "André Formento";
+        final String name = "André Formento";
 
         // when
-        Person person = new Person(name);
+        final Person person = new Person(name);
 
         // then
         person.doSomethingWithoutReturn(1, "a");
@@ -35,13 +36,18 @@ public class PersonTest {
     @Test
     public void shouldFormatName() {
         // given
-        String name = "André Formento";
+        final String name = "André Formento";
 
         // when
-        String toString = new Person(name).toString();
+        final String toString = new Person(name).toString();
 
         // then
         assertEquals("Name: " + name, toString);
+    }
+
+    @Test
+    public void shouldVerifyContractOfEqualsAndHashCode() {
+        EqualsVerifier.forClass(Person.class).verify();
     }
 
 }

@@ -1,26 +1,25 @@
-package com.formento.mockito.test;
+package com.formento.mycomplexapplication;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.runners.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class PersonValidatorTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
+    @InjectMocks
     private PersonValidator personValidator;
-
-    @Before
-    public void init() {
-        this.personValidator = new PersonValidator();
-    }
 
     @Test
     public void shouldBeAValidatePerson() {
         // given
-        Person person = new Person("André Formento");
+        final Person person = new Person("André Formento");
 
         // when..then
         personValidator.validatePerson(person);
@@ -29,11 +28,11 @@ public class PersonValidatorTest {
     @Test
     public void shouldNotBeAValidatePerson() {
         // given
-        Person person = new Person(null);
+        final Person person = new Person(null);
 
-        // then
+        // expected exception
         expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage("You need put a name in a person :(");
+        expectedException.expectMessage("You need put a person name :(");
 
         // when
         personValidator.validatePerson(person);
